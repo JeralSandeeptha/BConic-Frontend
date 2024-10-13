@@ -62,3 +62,27 @@ export type AuthHeaderProps = {
 export type LableProps = {
     title: string
 }
+
+export type NavLinkProps = {
+    id: number,
+    iconName: string,
+    name: string,
+    route: string,
+}
+
+export type PageHeaderProps = {
+    title: string,
+    subTitle: string,
+}
+
+export type CourierProps = {
+    _id?: string,
+}
+
+export type NoDataProps = {
+    message: string,
+}
+
+export type BackButtonProps = {
+    image: string
+}
