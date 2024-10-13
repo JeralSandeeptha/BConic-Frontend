@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './SideNavigation.scss';
 import AuthSubHeader from '../auth-subheader/AuthSubHeader';
 import NavigationLink from '../nav-link/NavigationLink';
 import Section from '../section/Section';
+import { TokenContext } from '../../context/TokenContext';
+import { IdContext } from '../../context/UserIdContext';
+import { RoleContext } from '../../context/RoleContext';
+import { User } from '../../types/model';
+import getSingleUser from '../../api/user-service/getUser';
 
 const SideNavigation = () => {
+
+    const [user, setUser] = useState<User | undefined>(undefined); 
 
     const mainNavLinks = [
         {
@@ -26,6 +33,33 @@ const SideNavigation = () => {
             iconName: 'https://res.cloudinary.com/dgit2ltnm/image/upload/v1728816762/user-add_kejodv.png'
         },
     ]
+
+    const tokenContext = useContext(TokenContext);
+    const updateToken = tokenContext?.updateToken;
+    if (!updateToken) {
+        throw new Error('Token context is not available');
+    }
+    const idContext = useContext(IdContext);
+    const id = idContext?.id;
+    if (!id) {
+        throw new Error('Id context is not available');
+    }
+    const roleContext = useContext(RoleContext);
+    const updateRole = roleContext?.updateRole;
+    if (!updateRole) {
+        throw new Error('Role context is not available');
+    } 
+
+    const getUserInfor = () => {
+        getSingleUser({
+            id: id,
+            setUser: setUser
+        });
+    }
+
+    useEffect(() => {
+        getUserInfor();
+    }, [])
 
     return (
         <div className='test side-navigation'>
@@ -56,8 +90,8 @@ const SideNavigation = () => {
                     <img src="https://res.cloudinary.com/dv9ax00l4/image/upload/v1723890106/user-profile-img-removebg-preview_rlafow.png" alt='profile-img' className="test profile-img" />
                 </div>
                 <div className="test nav-footer-right">
-                    <h6 className="test name">Jeral Sandeeptha</h6>
-                    <h6 className="test email">jeral.sandeeptha1@gmail.com</h6>
+                    <h6 className="test name">{user?.first_name && user?.last_name ? `${user?.first_name} ${user?.last_name}` : 'Guest'}</h6>
+                    <h6 className="test email">{user?.email}</h6>
                 </div>
             </div>
         </div>

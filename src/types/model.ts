@@ -30,3 +30,23 @@ export interface RoleContextType {
 export interface RoleProviderProps {
     children: ReactNode;
 }
+
+export interface User {
+    user_id: number;
+    email?: string;
+    password?: string;
+    first_name?: string;
+    last_name?: string;
+    address?: string;
+    mobile?: string;
+    role?: string;
+    created_at?: string;
+    updated_at?: string;
+}
+
+export interface UpdateUser {
+    first_name?: string;
+    last_name?: string;
+    address?: string;
+    mobile?: string;
+}

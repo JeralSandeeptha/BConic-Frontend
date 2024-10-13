@@ -1,5 +1,6 @@
 import { Dispatch, ReactNode, SetStateAction } from "react"
 import { NavigateFunction } from "react-router-dom"
+import { UpdateUser, User } from "./model";
 
 export type HandleUserRegisterProps = {
     email: string,
@@ -25,3 +26,9 @@ export type HandleUserLoginProps = {
     updateId: (id: string) => void
     updateRole: (id: string) => void
 };
+
+export type GetSingleUserProps = {
+    setUser: Dispatch<SetStateAction<User | undefined>>,
+    setFormData?: Dispatch<SetStateAction<UpdateUser | undefined>>,
+    id: string | null
+}
