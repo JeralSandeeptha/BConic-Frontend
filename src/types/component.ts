@@ -86,3 +86,9 @@ export type NoDataProps = {
 export type BackButtonProps = {
     image: string
 }
+
+export type AlertProps = {
+    type: 'warn' | 'error' | 'success',
+    statusCode: number,
+    message: string,
+}
