@@ -13,6 +13,21 @@ export type HandleUserRegisterProps = {
     navigate: NavigateFunction,
 };
 
+export type HandleAddCourierProps = {
+    setError: Dispatch<SetStateAction<boolean>>,
+    setLoading: Dispatch<SetStateAction<boolean>>,
+    setStatusCode: Dispatch<SetStateAction<number>>,
+    setMessage: Dispatch<SetStateAction<string>>,
+    navigate: NavigateFunction,
+    userId: string | null,
+    senderName: string | null,
+    senderAddress: string | null,
+    recepientName: string | null,
+    recepientAddress: string | null,
+    additionalInfo: string | null,
+    mobile: string | null,
+};
+
 export type HandleUserLoginProps = {
     email: string,
     password: string,

@@ -21,6 +21,7 @@ export type DashboardTextfieldProps = {
     type: string;
     name: string;
     value: string;
+    disable?: boolean;
     placeholder: string;
     isDescription?: boolean;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;

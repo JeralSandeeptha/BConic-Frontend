@@ -1,15 +1,108 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './AddCourierPage.scss';
 import { AddCourierPageProps } from '../../types/page';
 import BackButton from '../../components/back-button/BackButton';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Lable from '../../components/lable/Lable';
 import DashboardTextfield from '../../components/dashboard-textfield/DashboardTextfield';
+import getSingleUser from '../../api/user-service/getUser';
+import { IdContext } from '../../context/UserIdContext';
+import { User } from '../../types/model';
+import Section from '../../components/section/Section';
+import LoadingPage from '../loading-page/LoadingPage';
+import Alert from '../../components/alert/Alert';
+import createCourier from '../../api/courier-endpoints/createCourier';
 
 const AddCourierPage = (props: AddCourierPageProps) => {
 
+    const [user, setUser] = useState<User | undefined>(undefined);
+
+    const [name, setName] = useState<string>();
+    const [mobile, setMobile] = useState<string>();
+    const [address, setAddress] = useState<string>();
+
+    const [senderInfo, setSenderInfo] = useState({
+        recepientAddress: '',
+        recepientName: '',
+        additionalInfo: ''
+    });
+
+    const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [statusCode, setStatusCode] = useState(0);
+    const [message, setMessage] = useState('');
+
+    const navigate = useNavigate();
+
+    const idContext = useContext(IdContext);
+    const id = idContext?.id;
+    if (!id) {
+        throw new Error('Id context is not available');
+    }
+
+    const submitPlaceOrder = () => {
+        if (!name?.trim() || !mobile?.trim() || !address?.trim()) {
+            alert('Please update your name, mobile and address from the profile section. Then you can proceed.');
+        } else if (!senderInfo.recepientName?.trim() || !senderInfo.recepientAddress?.trim()){
+            alert('Please fill recepient name and address.');
+        } else {
+            createCourier({
+                setError: setError,
+                setLoading: setLoading,
+                setStatusCode: setStatusCode,
+                setMessage: setMessage,
+                navigate: navigate,
+                userId: id,
+                senderName: name || '',
+                mobile: mobile || '',
+                senderAddress: address || '',
+                recepientName: senderInfo.recepientName,
+                recepientAddress: senderInfo.recepientAddress,
+                additionalInfo: senderInfo.additionalInfo,
+            });
+        }
+    }
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSenderInfo((prevData) => ({
+            ...prevData,
+            [e.target.name]: e.target.value,
+        }));
+    };
+
+    const getUserInfor = () => {
+        getSingleUser({
+            id: id,
+            setUser: setUser
+        });
+    }
+
+    useEffect(() => {
+        getUserInfor();
+    }, [])
+
+    useEffect(() => {
+        if (user) {
+            setName(`${user.first_name} ${user.last_name}`);
+            setAddress(user.address);
+            setMobile(user.mobile);
+        }
+    }, [user]);
+
     return (
         <div className='test add-courier'>
+
+            {
+                loading && <LoadingPage />
+            }
+
+            {
+                error && <Alert
+                    message={message}
+                    statusCode={statusCode}
+                    type='error'
+                />
+            }
 
             <div className="test single-courier-header">
                 <Link to='/dashboard/my-couriers'>
@@ -24,50 +117,28 @@ const AddCourierPage = (props: AddCourierPageProps) => {
                 <div className="test form-container">
                     <div className="test input">
                         <Lable
-                            title='First Name'
+                            title='Sender Name'
                         />
                         <DashboardTextfield
+                            disable={true}
                             type='text'
-                            name='fname'
-                            value=""
-                            placeholder='Enter pilot first name'
-                            onChange={()=>{}}
+                            name='senderName'
+                            value={name || ''}
+                            placeholder='Update your name from profile section'
+                            onChange={() => { }}
                         />
                     </div>
                     <div className="test input">
                         <Lable
-                            title='Last Name'
+                            title='Sender Address'
                         />
                         <DashboardTextfield
+                            disable={true}
                             type='text'
-                            name='lname'
-                            value=""
-                            placeholder='Enter pilot last name'
-                            onChange={()=>{}}
-                        />
-                    </div>
-                    <div className="test input">
-                        <Lable
-                            title='Profile Image'
-                        />
-                        <DashboardTextfield
-                            type='text'
-                            name='image'
-                            value=""
-                            placeholder='Enter pilot profile image url / Optional'
-                            onChange={()=>{}}
-                        />
-                    </div>
-                    <div className="test input">
-                        <Lable
-                            title='Age'
-                        />
-                        <DashboardTextfield
-                            type='text'
-                            name='age'
-                            value=""
-                            placeholder='Enter pilot age'
-                            onChange={()=>{}}
+                            name='senderAddress'
+                            value={address || ''}
+                            placeholder='Update your address from profile section'
+                            onChange={() => { }}
                         />
                     </div>
                     <div className="test input">
@@ -75,80 +146,59 @@ const AddCourierPage = (props: AddCourierPageProps) => {
                             title='Mobile'
                         />
                         <DashboardTextfield
+                            disable={true}
                             type='text'
                             name='mobile'
-                            value=""
-                            placeholder='Enter pilot mobile number'
-                            onChange={()=>{}}
+                            value={mobile || ''}
+                            placeholder='Update your mobile number from profile section'
+                            onChange={() => { }}
                         />
                     </div>
                     <div className="test input">
                         <Lable
-                            title='Email Address'
+                            title='Recepient Name'
                         />
                         <DashboardTextfield
                             type='text'
-                            name='email'
-                            value=""
-                            placeholder='Enter pilot email address'
-                            onChange={()=>{}}
+                            name='recepientName'
+                            value={senderInfo.recepientName || ''}
+                            placeholder='Enter the recepient name'
+                            onChange={handleChange}
                         />
                     </div>
                     <div className="test input">
                         <Lable
-                            title='Address'
+                            title='Recepient Address'
                         />
                         <DashboardTextfield
                             type='text'
-                            name='address'
-                            value=""
-                            placeholder='Enter pilot address'
-                            onChange={()=>{}}
+                            name='recepientAddress'
+                            value={senderInfo.recepientAddress || ''}
+                            placeholder='Enter the recepient address'
+                            onChange={handleChange}
                         />
                     </div>
                     <div className="test input">
                         <Lable
-                            title='Employee ID'
+                            title='Additional Notes'
                         />
                         <DashboardTextfield
                             type='text'
-                            name='employee_id'
-                            value=""
-                            placeholder='Enter pilot employee id'
-                            onChange={()=>{}}
+                            name='additionalInfo'
+                            value={senderInfo.additionalInfo || ''}
+                            placeholder='Enter additional notes'
+                            onChange={handleChange}
                         />
-                    </div>
-                    <div className="test input">
-                        <Lable
-                            title='Company'
-                        />
-                        <DashboardTextfield
-                            type='text'
-                            name='company'
-                            value=""
-                            placeholder='Enter pilot company'
-                            onChange={()=>{}}
-                        />
-                    </div>
-                    <div className="test input">
-                        <Lable
-                            title='Position'
-                        />
-                        <DashboardTextfield
-                            type='text'
-                            name='position'
-                            value=''
-                            placeholder='Enter pilot position'
-                            onChange={()=>{}}
-                        />
-                    </div>
-                    <div className="test input">
-                        <Lable
-                            title='Click here to add pilot'
-                        />
-                        <button className="test add-btn" onClick={()=>{}}>Add Pilot</button>
                     </div>
                 </div>
+                <Section marginTop='20px'>
+                    <div className="test input">
+                        <Lable
+                            title='Click here to add a new courier'
+                        />
+                        <button className="test add-btn" onClick={submitPlaceOrder}>Place Order</button>
+                    </div>
+                </Section>
             </div>
 
         </div>
