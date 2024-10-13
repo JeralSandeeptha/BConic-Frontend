@@ -2,7 +2,7 @@ import React from 'react';
 import './DashboardTextfield.scss';
 import { DashboardTextfieldProps } from '../../types/component';
 
-const DashboardTextfield: React.FC<DashboardTextfieldProps> = ({ type, name, value, placeholder, onChange, isDescription }) => {
+const DashboardTextfield: React.FC<DashboardTextfieldProps> = ({ disable, type, name, value, placeholder, onChange, isDescription }) => {
   return (
     <input
       style={{
@@ -14,6 +14,7 @@ const DashboardTextfield: React.FC<DashboardTextfieldProps> = ({ type, name, val
       value={value}
       placeholder={placeholder}
       onChange={onChange} 
+      disabled={disable}
     />
   );
 };

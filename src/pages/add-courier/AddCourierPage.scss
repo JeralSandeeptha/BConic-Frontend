@@ -54,21 +54,22 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
+        }
 
-            .input {
+        .input {
 
-                .add-btn {
-                    background-color: $black;
-                    color: $white;
-                    width: 100%;
-                    border-radius: 0.25rem;
-                    padding: 14px 30px;
-                    cursor: pointer;
-                    border: none;
-                    outline: none;
-                    font-family: $primary-font;
-                    font-size: 13px;
-                }
+            .add-btn {
+                background-color: $black;
+                color: $white;
+                width: 100%;
+                border-radius: 0.25rem;
+                padding: 14px 30px;
+                cursor: pointer;
+                border: none;
+                outline: none;
+                font-family: $primary-font;
+                font-size: 13px;
+                width: 50%;
             }
         }
     }
