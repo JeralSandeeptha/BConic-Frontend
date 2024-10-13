@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import './LoginPage.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../../components/logo/Logo';
 import Section from '../../components/section/Section';
 import RoundedIcon from '../../components/rounded-icon/RoundedIcon';
@@ -12,13 +12,68 @@ import Lable from '../../components/lable/Lable';
 import Textfield from '../../components/textfield/Textfield';
 import AuthButton from '../../components/auth-button/AuthButton';
 import { LoginPageProps } from '../../types/page';
+import Alert from '../../components/alert/Alert';
+import loginUser from '../../api/user-service/loginUser';
+import { TokenContext } from '../../context/TokenContext';
+import { IdContext } from '../../context/UserIdContext';
+import { RoleContext } from '../../context/RoleContext';
 
 const LoginPage = (props: LoginPageProps) => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [statusCode, setStatusCode] = useState(0);
+  const [message, setMessage] = useState('');
+
+  const navigate = useNavigate();
+
+  const tokenContext = useContext(TokenContext);
+  const updateToken = tokenContext?.updateToken;
+  if (!updateToken) {
+    throw new Error('Token context is not available');
+  }
+  const idContext = useContext(IdContext);
+  const updateId = idContext?.updateId;
+  if (!updateId) {
+    throw new Error('Id context is not available');
+  } 
+  const roleContext = useContext(RoleContext);
+  const updateRole = roleContext?.updateRole;
+  if (!updateRole) {
+    throw new Error('Role context is not available');
+  } 
+
+  const handleEmail = (value: string) => {
+    setEmail(value);
+    console.log(value);
+  }
+  const handlePassword = (value: string) => {
+    setPassword(value);
+    console.log(value);
+  }
+  const resetCredentials = () => {
+    setEmail('');
+    setPassword('');
+  }
+
+  const handleLogin = () => {
+    loginUser({
+      email: email,
+      password: password,
+      resetCredentials: resetCredentials,
+      setError: setError,
+      setLoading: setLoading,
+      setStatusCode: setStatusCode,
+      setMessage: setMessage,
+      navigate: navigate,
+      updateToken: updateToken,
+      updateId: updateId,
+      updateRole: updateRole
+    });
+  }
 
   return (
     <div className='test login-page'>
@@ -64,7 +119,7 @@ const LoginPage = (props: LoginPageProps) => {
               placeholder='Enter your email address'
               type='email'
               value={email}
-              onChange={() => {}}
+              onChange={handleEmail}
             />
           </div>
           
@@ -74,11 +129,11 @@ const LoginPage = (props: LoginPageProps) => {
               placeholder='Enter your password'
               type='password'
               value={password}
-              onChange={() => {}}
+              onChange={handlePassword}
             />
           </div>
 
-          <AuthButton title='Login' backgroundColor='#000' textColor='#fff' />
+          <AuthButton title='Login' backgroundColor='#000' textColor='#fff' onClick={handleLogin}/>
 
           <Section marginTop='20px' marginBottom='10px'>
             {/* <Link to='/forgot-password'>
@@ -95,6 +150,14 @@ const LoginPage = (props: LoginPageProps) => {
 
           {
             loading && <LoadingPage />
+          }
+
+          {
+            error && <Alert
+              message={message}
+              statusCode={statusCode}
+              type='error'
+            />
           }
 
         </div>
