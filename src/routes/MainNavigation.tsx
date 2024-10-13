@@ -4,17 +4,28 @@ import LandingPage from '../pages/landing-page/LandingPage';
 import LoginPage from '../pages/login-page/LoginPage';
 import SignInPage from '../pages/signin-page/SignInPage';
 import NotFoundPage from '../pages/notfound-page/NotFoundPage';
+import DashboardPage from '../pages/dashboard-page/DashboardPage';
+import Profile from '../pages/profile/Profile';
+import MyCouriersPage from '../pages/my-couriers/MyCouriersPage';
+import AddCourierPage from '../pages/add-courier/AddCourierPage';
+import SingleCourier from '../pages/single-courier/SingleCourier';
 
 const MainNavigation = () => {
 
   return (
     <BrowserRouter>
-        <Routes>
-            <Route path='/' Component={LandingPage}/>
-            <Route path='/login' Component={LoginPage}/>
-            <Route path='/signin' Component={SignInPage}/>
-            <Route path='*' Component={NotFoundPage}/>
-        </Routes>
+      <Routes>
+        <Route path='/' Component={LandingPage} />
+        <Route path='/login' Component={LoginPage} />
+        <Route path='/signin' Component={SignInPage} />
+        <Route path='/dashboard' Component={DashboardPage}>
+          <Route path='' element={<Profile />} />
+          <Route path='my-couriers' element={<MyCouriersPage />} />
+          <Route path='add-courier' element={<AddCourierPage />} />
+          <Route path='courier/:courierId' element={<SingleCourier />} />
+        </Route>
+        <Route path='*' Component={NotFoundPage} />
+      </Routes>
     </BrowserRouter>
   );
 
