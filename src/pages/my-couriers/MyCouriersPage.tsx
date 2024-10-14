@@ -8,6 +8,7 @@ import NoData from '../../components/no-data/NoData';
 import { IGetCourier } from '../../types/model';
 import { IdContext } from '../../context/UserIdContext';
 import getAllCouriersByUserId from '../../api/courier-endpoints/getAllCouriersByUserId';
+import COURIER_STATUS from '../../types/enum';
 
 const MyCouriersPage = (props: MyCouriersPageProps) => {
 
@@ -74,12 +75,17 @@ const MyCouriersPage = (props: MyCouriersPageProps) => {
                 </div>
                 <div className="test search-option-section">
                     <select id="options" className='options test' value={selectedStatus} onChange={handleStatusChange}>
-                        <option value="USA" className='test option'>USA</option>
-                        <option value="UK" className='test option'>UK</option>
-                        <option value="Canada" className='test option'>Canada</option>
-                        <option value="Australia" className='test option'>Australia</option>
-                        <option value="Sri Lanka" className='test option'>Sri Lanka</option>
-                        <option value="Afghanistan" className='test option'>Afghanistan</option>
+                        <option value={COURIER_STATUS.ORDER_PLACED} className='test option'>{COURIER_STATUS.ORDER_PLACED}</option>
+                        <option value={COURIER_STATUS.PICKED_UP} className='test option'>{COURIER_STATUS.PICKED_UP}</option>
+                        <option value={COURIER_STATUS.IN_TRANSIT} className='test option'>{COURIER_STATUS.IN_TRANSIT}</option>
+                        <option value={COURIER_STATUS.OUT_FOR_DELIVERY} className='test option'>{COURIER_STATUS.OUT_FOR_DELIVERY}</option>
+                        <option value={COURIER_STATUS.ATTEMPTED_DELIVERY} className='test option'>{COURIER_STATUS.ATTEMPTED_DELIVERY}</option>
+                        <option value={COURIER_STATUS.RETURNED_TO_SENDER} className='test option'>{COURIER_STATUS.RETURNED_TO_SENDER}</option>
+                        <option value={COURIER_STATUS.ON_HOLD} className='test option'>{COURIER_STATUS.ON_HOLD}</option>
+                        <option value={COURIER_STATUS.CANCELLED} className='test option'>{COURIER_STATUS.CANCELLED}</option>
+                        <option value={COURIER_STATUS.DELAYED} className='test option'>{COURIER_STATUS.DELAYED}</option>
+                        <option value={COURIER_STATUS.PROCESSING} className='test option'>{COURIER_STATUS.PROCESSING}</option>
+                        <option value={COURIER_STATUS.LOST} className='test option'>{COURIER_STATUS.LOST}</option>
                     </select>
                 </div>
                 <Link to='/dashboard/add-courier' className='test add-mycouriers-btn-link'>
