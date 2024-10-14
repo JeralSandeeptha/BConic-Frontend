@@ -4,23 +4,28 @@ const baseURL = process.env.REACT_APP_BACKEND_BASE_URL;
 
 const updateCourier = (props: UpdateCourierById) => {
     try {
-        props.setSuccess(true);
         axios.put(`${baseURL}/courier/updateByCourierId/${props.courierId}`, {
             status: props.status
+        }, {
+            headers: {
+                Authorization: `Bearer ${props.token}`
+            }
         })
             .then((res) => {
                 console.log(res.data.data);
                 console.log(res.data);
+                props.setSuccess(true);
                 props.setStatusCode(200);
                 props.setLoading(true);
                 props.setMessage('Your profile is updated successfully');
                 setTimeout(() => {
                     props.setSuccess(false);
                     props.setLoading(false);
+                    props.navigate('/dashboard/manage-couriers');
                 }, 5000);
             })
             .catch((error) => {
-                console.log(error.message);
+                console.log(error.response);
                 props.setStatusCode(400);
                 props.setMessage('Can not update the courier.');
                 props.setError(true);

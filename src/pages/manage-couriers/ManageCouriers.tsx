@@ -10,6 +10,7 @@ import COURIER_STATUS from '../../types/enum';
 import Courier from '../../components/courier/Courier';
 import NoData from '../../components/no-data/NoData';
 import CourierAdmin from '../../components/courier-admin/CourierAdmin';
+import { TokenContext } from '../../context/TokenContext';
 
 const ManageCouriers = (props: ManageCouriersPageProps) => {
 
@@ -24,6 +25,9 @@ const ManageCouriers = (props: ManageCouriersPageProps) => {
     }
     const { id } = idContext;
 
+    const tokenContext = useContext(TokenContext);
+    const token = tokenContext?.token;
+
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);
     };
@@ -31,6 +35,7 @@ const ManageCouriers = (props: ManageCouriersPageProps) => {
     const getCouriers = () => {
         getAllCouriers({
             setCourieres: setCourieres,
+            token: token || ''
         });
     }
 

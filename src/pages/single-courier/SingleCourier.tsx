@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './SingleCourier.scss';
 import { SingleCourierPageProps } from '../../types/page';
 import { Link, useParams } from 'react-router-dom';
@@ -10,6 +10,7 @@ import animationData1 from '../../assets/lotties/ongoing.json';
 import animationData3 from '../../assets/lotties/accept-order.json';
 import animationData2 from '../../assets/lotties/review.json';
 import animationData4 from '../../assets/lotties/ok.json';
+import { TokenContext } from '../../context/TokenContext';
 
 const SingleCourier = (props: SingleCourierPageProps) => {
 
@@ -17,10 +18,14 @@ const SingleCourier = (props: SingleCourierPageProps) => {
 
   const { courierId } = useParams();
 
+  const tokenContext = useContext(TokenContext);
+  const token = tokenContext?.token;
+
   const getSingleCourier = () => {
     getCourier({
       courierId: courierId,
       setCourier: setCourier,
+      token: token || ''
     });
   }
 

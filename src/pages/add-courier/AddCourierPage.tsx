@@ -12,6 +12,7 @@ import Section from '../../components/section/Section';
 import LoadingPage from '../loading-page/LoadingPage';
 import Alert from '../../components/alert/Alert';
 import createCourier from '../../api/courier-endpoints/createCourier';
+import { TokenContext } from '../../context/TokenContext';
 
 const AddCourierPage = (props: AddCourierPageProps) => {
 
@@ -38,7 +39,11 @@ const AddCourierPage = (props: AddCourierPageProps) => {
     const id = idContext?.id;
     if (!id) {
         throw new Error('Id context is not available');
+
     }
+
+    const tokenContext = useContext(TokenContext);
+    const token = tokenContext?.token;
 
     const submitPlaceOrder = () => {
         if (!name?.trim() || !mobile?.trim() || !address?.trim()) {
@@ -59,6 +64,7 @@ const AddCourierPage = (props: AddCourierPageProps) => {
                 recepientName: senderInfo.recepientName,
                 recepientAddress: senderInfo.recepientAddress,
                 additionalInfo: senderInfo.additionalInfo,
+                token: token || ''
             });
         }
     }
@@ -73,7 +79,8 @@ const AddCourierPage = (props: AddCourierPageProps) => {
     const getUserInfor = () => {
         getSingleUser({
             id: id,
-            setUser: setUser
+            setUser: setUser,
+            token: token || ''
         });
     }
 

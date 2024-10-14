@@ -26,6 +26,7 @@ export type HandleAddCourierProps = {
     recepientAddress: string | null,
     additionalInfo: string | null,
     mobile: string | null,
+    token: string
 };
 
 export type HandleUserLoginProps = {
@@ -43,6 +44,7 @@ export type HandleUserLoginProps = {
 };
 
 export type GetSingleUserProps = {
+    token: string,
     setUser: Dispatch<SetStateAction<User | undefined>>,
     setFormData?: Dispatch<SetStateAction<UpdateUser | undefined>>,
     id: string | null
@@ -58,20 +60,24 @@ export type UpdateUserProps = {
     setStatusCode: Dispatch<SetStateAction<number>>,
     setMessage: Dispatch<SetStateAction<string>>,
     getSingleUser?: (props: GetSingleUserProps) => void,
+    token: string
 }
 
 export type GetCouriersByUserIdProps = {
     userId: string | null,
     setCourieres: Dispatch<SetStateAction<ICourier[]>>
+    token: string
 }
 
 export type GetAllCouriersProps = {
     setCourieres: Dispatch<SetStateAction<ICourier[]>>
+    token: string
 }
 
 export type GetCourierProps = {
     courierId: string | undefined,
-    setCourier: (data: any) => void
+    setCourier: (data: any) => void,
+    token: string
 }
 
 export type UpdateCourierById = {
@@ -82,4 +88,6 @@ export type UpdateCourierById = {
     setLoading: Dispatch<SetStateAction<boolean>>,
     setStatusCode: Dispatch<SetStateAction<number>>,
     setMessage: Dispatch<SetStateAction<string>>,
+    token: string,
+    navigate: NavigateFunction
 }

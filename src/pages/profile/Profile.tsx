@@ -36,7 +36,7 @@ const Profile = (props: ProfilePageProps) => {
   if (!tokenContext) {
     throw new Error('Token context is not available');
   }
-  const { clearToken } = tokenContext;
+  const { clearToken, token } = tokenContext;
 
   const roleContext = useContext(RoleContext);
   if (!roleContext) {
@@ -73,7 +73,8 @@ const Profile = (props: ProfilePageProps) => {
       setSuccess: setSuccess,
       setMessage: setMessage,
       setStatusCode: setStatusCode,
-      getSingleUser: getSingleUser
+      getSingleUser: getSingleUser,
+      token: token || ''
     });
   }
 
@@ -81,7 +82,8 @@ const Profile = (props: ProfilePageProps) => {
     getSingleUser({
       setUser: setUser,
       setFormData: setFormData,
-      id: id
+      id: id,
+      token: token || ''
     });
   }
 

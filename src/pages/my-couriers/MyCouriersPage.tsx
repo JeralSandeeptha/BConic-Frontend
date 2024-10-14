@@ -9,6 +9,7 @@ import { IGetCourier } from '../../types/model';
 import { IdContext } from '../../context/UserIdContext';
 import getAllCouriersByUserId from '../../api/courier-endpoints/getAllCouriersByUserId';
 import COURIER_STATUS from '../../types/enum';
+import { TokenContext } from '../../context/TokenContext';
 
 const MyCouriersPage = (props: MyCouriersPageProps) => {
 
@@ -23,6 +24,9 @@ const MyCouriersPage = (props: MyCouriersPageProps) => {
     }
     const { id } = idContext;
 
+    const tokenContext = useContext(TokenContext);
+    const token = tokenContext?.token;
+
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);
     };
@@ -31,6 +35,7 @@ const MyCouriersPage = (props: MyCouriersPageProps) => {
         getAllCouriersByUserId({
             userId: id,
             setCourieres: setCourieres,
+            token: token || ''
         });
     }
 

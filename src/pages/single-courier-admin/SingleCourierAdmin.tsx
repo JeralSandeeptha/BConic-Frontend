@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './SingleCourierAdmin.scss';
 import { SingleCourierPageProps } from '../../types/page';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { IGetCourier } from '../../types/model';
 import getCourier from '../../api/courier-endpoints/getCourier';
 import BackButton from '../../components/back-button/BackButton';
@@ -17,6 +17,7 @@ import Section from '../../components/section/Section';
 import updateCourier from '../../api/courier-endpoints/updateCourier';
 import Alert from '../../components/alert/Alert';
 import LoadingPage from '../loading-page/LoadingPage';
+import { TokenContext } from '../../context/TokenContext';
 
 const SingleCourierAdmin = (props: SingleCourierPageProps) => {
   const [courier, setCourier] = useState<IGetCourier>();
@@ -28,7 +29,12 @@ const SingleCourierAdmin = (props: SingleCourierPageProps) => {
   const [message, setMessage] = useState('');
   const [statusCode, setStatusCode] = useState(0);
 
+  const tokenContext = useContext(TokenContext);
+  const token = tokenContext?.token;
+
   const { courierId } = useParams();
+
+  const navigate = useNavigate();
 
   const handleUpdateOrder = () => {
     updateCourier({
@@ -39,6 +45,8 @@ const SingleCourierAdmin = (props: SingleCourierPageProps) => {
       setSuccess: setSuccess,  
       setMessage: setMessage,  
       setStatusCode: setStatusCode,  
+      token: token || '',
+      navigate: navigate
     });
   };
 
@@ -46,6 +54,7 @@ const SingleCourierAdmin = (props: SingleCourierPageProps) => {
     getCourier({
       courierId: courierId,
       setCourier: setCourier,
+      token: token || ''
     });
   };
 

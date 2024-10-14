@@ -14,6 +14,10 @@ const createCourier = async (props: HandleAddCourierProps) => {
             recepientAddress: props.recepientAddress,
             additionalInfo: props.additionalInfo,
             mobile: props.mobile,
+        }, {
+            headers: {
+                Authorization: `Bearer ${props.token}`
+            }
         })
             .then((res) => {
                 console.log(res.data.data);
