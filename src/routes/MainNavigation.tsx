@@ -9,6 +9,7 @@ import Profile from '../pages/profile/Profile';
 import MyCouriersPage from '../pages/my-couriers/MyCouriersPage';
 import AddCourierPage from '../pages/add-courier/AddCourierPage';
 import SingleCourier from '../pages/single-courier/SingleCourier';
+import ManageCouriers from '../pages/manage-couriers/ManageCouriers';
 
 const MainNavigation = () => {
 
@@ -22,6 +23,7 @@ const MainNavigation = () => {
           <Route path='' element={<Profile />} />
           <Route path='my-couriers' element={<MyCouriersPage />} />
           <Route path='add-courier' element={<AddCourierPage />} />
+          <Route path='manage-couriers' element={<ManageCouriers />} />
           <Route path='courier/:courierId' element={<SingleCourier />} />
         </Route>
         <Route path='*' Component={NotFoundPage} />

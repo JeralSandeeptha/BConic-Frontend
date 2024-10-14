@@ -65,7 +65,7 @@ export type LableProps = {
 }
 
 export type NavLinkProps = {
-    id: number,
+    id?: number,
     iconName: string,
     name: string,
     route: string,

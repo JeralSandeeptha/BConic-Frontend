@@ -7,3 +7,4 @@ export type ProfilePageProps = {};
 export type AddCourierPageProps = {};
 export type MyCouriersPageProps = {};
 export type SingleCourierPageProps = {};
+export type ManageCouriersPageProps = {};

@@ -46,7 +46,8 @@ const SideNavigation = () => {
     }
     const roleContext = useContext(RoleContext);
     const updateRole = roleContext?.updateRole;
-    if (!updateRole) {
+    const role = roleContext?.role;
+    if (!updateRole && !role) {
         throw new Error('Role context is not available');
     } 
 
@@ -83,6 +84,16 @@ const SideNavigation = () => {
                         })
                     }
                     <hr className='line' />
+                    {
+                        role == 'admin' && (
+                            <NavigationLink
+                                id={4}
+                                name="Handle Couriers"
+                                route="/dashboard/manage-couriers"
+                                iconName="https://res.cloudinary.com/dgit2ltnm/image/upload/v1728887805/person-circle-plus_wxpqzc.png"
+                            />
+                        )
+                    }
                 </div>
             </div>
             <div className="test nav-footer">
