@@ -9,6 +9,7 @@ import getAllCouriers from '../../api/courier-endpoints/getAllCouriers';
 import COURIER_STATUS from '../../types/enum';
 import Courier from '../../components/courier/Courier';
 import NoData from '../../components/no-data/NoData';
+import CourierAdmin from '../../components/courier-admin/CourierAdmin';
 
 const ManageCouriers = (props: ManageCouriersPageProps) => {
 
@@ -121,7 +122,7 @@ const ManageCouriers = (props: ManageCouriersPageProps) => {
                         filteredCouriers.length === 0 ? <NoData message='No couriers data available' /> :
                             filteredCouriers.map((courier, index) => {
                                 return (
-                                    <Courier
+                                    <CourierAdmin
                                         key={index}
                                         courier_id={courier.courier_id}
                                         tracking_number={courier.tracking_number}
