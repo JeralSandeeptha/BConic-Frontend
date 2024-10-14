@@ -36,6 +36,7 @@ const SideNavigation = () => {
 
     const tokenContext = useContext(TokenContext);
     const updateToken = tokenContext?.updateToken;
+    const token = tokenContext?.token;
     if (!updateToken) {
         throw new Error('Token context is not available');
     }
@@ -54,7 +55,8 @@ const SideNavigation = () => {
     const getUserInfor = () => {
         getSingleUser({
             id: id,
-            setUser: setUser
+            setUser: setUser,
+            token: token || ''
         });
     }
 

@@ -1,10 +1,17 @@
 import axios from 'axios';
 import { GetSingleUserProps } from '../../types/function';
+import { useContext } from 'react';
+import { TokenContext } from '../../context/TokenContext';
 
 const baseURL = process.env.REACT_APP_BACKEND_BASE_URL;
 
 const getSingleUser = (props: GetSingleUserProps) => {
-    axios.get(`${baseURL}/user/getUserById/${props.id}`)
+
+    axios.get(`${baseURL}/user/getUserById/${props.id}`, {
+        headers: {
+            Authorization: `Bearer ${props.token}`
+        }
+    })
         .then((res) => {
             props.setUser(res.data.data);
             if (props.setFormData) {

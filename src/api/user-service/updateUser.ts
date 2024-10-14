@@ -5,7 +5,11 @@ const baseURL = process.env.REACT_APP_BACKEND_BASE_URL;
 
 const updateUser = async (props: UpdateUserProps) => {
     try {
-        await axios.put(`${baseURL}/user/updateByUserId/${props.id}`, props.formData)
+        await axios.put(`${baseURL}/user/updateByUserId/${props.id}`, props.formData, {
+            headers: {
+                Authorization: `Bearer ${props.token}`
+            }
+        })
             .then((res) => {
                 console.log(res.data);
                 props.setSuccess(true);
@@ -15,7 +19,8 @@ const updateUser = async (props: UpdateUserProps) => {
                     props.getSingleUser({
                         setUser: props.setUser,
                         setFormData: props.setFormData,
-                        id: props.id
+                        id: props.id,
+                        token: props.token
                     });
                 } else {
                     console.log('Cannot get single user');

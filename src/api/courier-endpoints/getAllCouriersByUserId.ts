@@ -4,7 +4,11 @@ const baseURL = process.env.REACT_APP_BACKEND_BASE_URL;
 
 const getAllCouriersByUserId = (props: GetCouriersByUserIdProps) => {
     try {
-        axios.get(`${baseURL}/courier/getCouriersByUserId/${props.userId}`)
+        axios.get(`${baseURL}/courier/getCouriersByUserId/${props.userId}`, {
+            headers: {
+                Authorization: `Bearer ${props.token}`
+            }
+        })
             .then((res) => {
                 console.log(res.data.data);
                 props.setCourieres(res.data.data);
