@@ -54,12 +54,12 @@ const SingleCourierAdmin = (props: SingleCourierPageProps) => {
     setSelectedStatus(newStatus);
     console.log(newStatus);
 
-    if (courier) {
-      setCourier((prevCourier) => ({
-        ...prevCourier,
-        status: newStatus,
-      }));
-    }
+    // if (courier) {
+    //   setCourier((prevCourier) => ({
+    //     ...prevCourier,
+    //     status: newStatus,
+    //   }));
+    // }
   };
 
   useEffect(() => {
