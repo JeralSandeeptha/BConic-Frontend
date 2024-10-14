@@ -68,3 +68,8 @@ export type GetCouriersByUserIdProps = {
 export type GetAllCouriersProps = {
     setCourieres: Dispatch<SetStateAction<ICourier[]>>
 }
+
+export type GetCourierProps = {
+    courierId: string | undefined,
+    setCourier: (data: any) => void
+}
