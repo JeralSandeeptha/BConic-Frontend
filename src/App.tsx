@@ -1,11 +1,10 @@
 import React from 'react';
 import './styles/App.scss';
+import MainNavigation from './routes/MainNavigation';
 
 function App() {
   return (
-    <div className="App">
-
-    </div>
+    <MainNavigation />
   );
 }
 

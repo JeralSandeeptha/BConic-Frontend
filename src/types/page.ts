@@ -1,0 +1,10 @@
+export type LandingPageProps = {};
+export type LoginPageProps = {};
+export type SigninPageProps = {};
+export type NotFoundPageProps = {};
+export type DashboardPageProps = {};
+export type ProfilePageProps = {};
+export type AddCourierPageProps = {};
+export type MyCouriersPageProps = {};
+export type SingleCourierPageProps = {};
+export type ManageCouriersPageProps = {};

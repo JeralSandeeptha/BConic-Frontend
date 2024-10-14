@@ -1,0 +1,100 @@
+@import '../../styles/_colors.scss';
+@import '../../styles/_fonts.scss';
+@import '../../styles/_breakpoints.scss';
+
+.single-courier {
+    width: 100%;
+    max-height: 100vh;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    .test-single-courier-header {
+        width: 100%;
+        height: 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 5px 30px;
+        background-color: rgb(246, 246, 246);
+        border-bottom: 1px solid rgb(207, 207, 207);
+        gap: 5px;
+
+        .page-subtitle {
+            font-family: $primary-font;
+            color: $textfield-text-color;
+            font-weight: normal;
+        }
+    }
+
+    .single-courier-content {
+        width: 100%;
+        min-height: calc(100vh - 80px);
+        max-height: calc(100vh - 80px);
+        padding: 30px;
+
+        .anim-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .anim {
+                width: 300px;
+                height: 300px;
+            }
+        }
+
+        .upper {
+            // background-color: aqua;
+
+            .name {
+                color: $black;
+                font-family: $primary-font;
+            }
+
+            .code {
+                color: $textfield-text-color;
+                font-family: $primary-font;
+                font-weight: normal;
+            }
+        }
+
+        .middle {
+            // background-color: red;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 50px;
+            margin-top: 20px;
+
+            .middle-left,
+            .middle-right {
+
+                .info-container {
+                    margin-bottom: 10px;
+                    // background-color: red;
+                    display: grid;
+                    grid-template-columns: 25% 75%;
+
+                    .info-lable {
+                        color: $black;
+                        font-family: $primary-font;
+                        font-size: 13px;
+                    }
+
+                    .info {
+                        font-weight: normal;
+                        color: $textfield-text-color;
+                        font-size: 12px;
+                        font-family: $primary-font;
+                    }
+                }
+            }
+        }
+
+        .lower {
+            // background-color: greenyellow;
+        }
+    }
+
+}
