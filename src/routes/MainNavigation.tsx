@@ -10,6 +10,7 @@ import MyCouriersPage from '../pages/my-couriers/MyCouriersPage';
 import AddCourierPage from '../pages/add-courier/AddCourierPage';
 import SingleCourier from '../pages/single-courier/SingleCourier';
 import ManageCouriers from '../pages/manage-couriers/ManageCouriers';
+import SingleCourierAdmin from '../pages/single-courier-admin/SingleCourierAdmin';
 
 const MainNavigation = () => {
 
@@ -25,6 +26,7 @@ const MainNavigation = () => {
           <Route path='add-courier' element={<AddCourierPage />} />
           <Route path='manage-couriers' element={<ManageCouriers />} />
           <Route path='courier/:courierId' element={<SingleCourier />} />
+          <Route path='courier/admin/:courierId' element={<SingleCourierAdmin />} />
         </Route>
         <Route path='*' Component={NotFoundPage} />
       </Routes>

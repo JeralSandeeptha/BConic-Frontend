@@ -124,13 +124,13 @@ const SingleCourier = (props: SingleCourierPageProps) => {
             </div>
             <div className="test info-container">
               <h6 className="test info-lable">Status :</h6>
-              {
-                courier?.recipient_address ? (
-                  <h6 className="test info">{courier?.status}</h6>
-                ) : (
-                  <h6 className="test info">Not Set</h6>
-                )
-              }
+                {
+                  courier?.status ? (
+                    <h6 className="test info">{courier?.status}</h6>
+                  ) : (
+                    <h6 className="test info">Not Set</h6>
+                  )
+                }
             </div>
           </div>
         </div>

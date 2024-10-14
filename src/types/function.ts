@@ -73,3 +73,13 @@ export type GetCourierProps = {
     courierId: string | undefined,
     setCourier: (data: any) => void
 }
+
+export type UpdateCourierById = {
+    courierId: string | undefined,
+    status: string | undefined,
+    setError: Dispatch<SetStateAction<boolean>>,
+    setSuccess: Dispatch<SetStateAction<boolean>>,
+    setLoading: Dispatch<SetStateAction<boolean>>,
+    setStatusCode: Dispatch<SetStateAction<number>>,
+    setMessage: Dispatch<SetStateAction<string>>,
+}
