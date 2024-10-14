@@ -47,3 +47,15 @@ export type GetSingleUserProps = {
     setFormData?: Dispatch<SetStateAction<UpdateUser | undefined>>,
     id: string | null
 }
+
+export type UpdateUserProps = {
+    id: string,
+    setUser: Dispatch<SetStateAction<User | undefined>>,
+    setFormData?: Dispatch<SetStateAction<UpdateUser | undefined>>,
+    formData?: UpdateUser | undefined
+    setError: Dispatch<SetStateAction<boolean>>,
+    setSuccess: Dispatch<SetStateAction<boolean>>,
+    setStatusCode: Dispatch<SetStateAction<number>>,
+    setMessage: Dispatch<SetStateAction<string>>,
+    getSingleUser?: (props: GetSingleUserProps) => void,
+}

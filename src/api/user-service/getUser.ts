@@ -7,14 +7,14 @@ const getSingleUser = (props: GetSingleUserProps) => {
     axios.get(`${baseURL}/user/getUserById/${props.id}`)
         .then((res) => {
             props.setUser(res.data.data);
-            // if (props.setFormData) {
-            //     props.setFormData({
-            //         first_name: res.data.data.first_name || '',
-            //         last_name: res.data.data.last_name || '',
-            //         address: res.data.data.address || '',
-            //         mobile: res.data.data.mobile || '',
-            //     });
-            // }
+            if (props.setFormData) {
+                props.setFormData({
+                    first_name: res.data.data.first_name || '',
+                    last_name: res.data.data.last_name || '',
+                    address: res.data.data.address || '',
+                    mobile: res.data.data.mobile || '',
+                });
+            }
         })
         .catch((error) => {
             console.log(error);

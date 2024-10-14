@@ -6,17 +6,111 @@ import Lable from '../../components/lable/Lable';
 import DashboardTextfield from '../../components/dashboard-textfield/DashboardTextfield';
 import { useNavigate } from 'react-router-dom';
 import { ProfilePageProps } from '../../types/page';
+import { TokenContext } from '../../context/TokenContext';
+import { IdContext } from '../../context/UserIdContext';
+import { UpdateUser, User } from '../../types/model';
+import { RoleContext } from '../../context/RoleContext';
+import getSingleUser from '../../api/user-service/getUser';
+import Alert from '../../components/alert/Alert';
+import updateUser from '../../api/user-service/updateUser';
 
 const Profile = (props: ProfilePageProps) => {
 
+  const [user, setUser] = useState<User | undefined>(undefined);
+  const [formData, setFormData] = useState<UpdateUser>();
+  const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [statusCode, setStatusCode] = useState(0);
+  const [message, setMessage] = useState('');
+
   const navigate = useNavigate();
+
+  const idContext = useContext(IdContext);
+  const id = idContext?.id;
+  const clearId = idContext?.clearId;
+  if (!id) {
+    throw new Error('Id context is not available');
+  }
+
+  const tokenContext = useContext(TokenContext);
+  if (!tokenContext) {
+    throw new Error('Token context is not available');
+  }
+  const { clearToken } = tokenContext;
+
+  const roleContext = useContext(RoleContext);
+  if (!roleContext) {
+    throw new Error('Role context is not available');
+  } 
+  const { role, clearRole } = roleContext;
+
+  const handleLogout = () => {
+    const confirmed = window.confirm("Are you sure you want to log out?");
+    if (confirmed) {
+      clearToken();
+      if (clearId) {
+        clearId();
+      }
+      clearRole();
+      navigate('/login');
+    }
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleUpdateUser = () => {
+    updateUser({
+      id: id,
+      setUser: setUser,
+      setFormData: setFormData,
+      formData: formData,
+      setError: setError,
+      setSuccess: setSuccess,
+      setMessage: setMessage,
+      setStatusCode: setStatusCode,
+      getSingleUser: getSingleUser
+    });
+  }
+
+  const getUserInfor = () => {
+    getSingleUser({
+      setUser: setUser,
+      setFormData: setFormData,
+      id: id
+    });
+  }
+
+  useEffect(() => {
+    getUserInfor();
+  }, []);
 
   return (
     <div className='profile'>
+
       <PageHeader
         title='Profile'
         subTitle='Here is your profile. Update and manage your profile details.'
       />
+
+      {
+        error && <Alert
+          message={message}
+          statusCode={statusCode}
+          type='error'
+        />
+      }
+      {
+        success && <Alert
+          message={message}
+          statusCode={statusCode}
+          type='success'
+        />
+      }
 
       <div className="profile-section">
         <div className="banner"></div>
@@ -30,16 +124,23 @@ const Profile = (props: ProfilePageProps) => {
           </div>
           <div className="test name-container-right">
             <Tooltip title="User Name" arrow>
-              <h1 className="test name">Jeral Sandeeptha</h1>
+              <div className="div">
+                <h1 className="test name">{user?.first_name && user?.last_name ? `${user?.first_name} ${user?.last_name}` : user?.email}</h1>
+                <h5 
+                  className="test role"
+                  style={{
+                    backgroundColor: user?.role == 'user' ? 'green' : 'red'
+                  }}
+                >{user?.role}</h5>
+              </div>
             </Tooltip>
             <Tooltip title="User Id" arrow>
-              <h5 className="test userId">Your UserID: 1</h5>
+              <h5 className="test userId">Your UserID: {user?.user_id}</h5>
             </Tooltip>
           </div>
         </div>
         <div className="test user-description-section">
-          <h3 className="test email">jeral.sandeeptha1@gmail.com</h3>
-          <h6 className="test description">Update your description to show here</h6>
+          <h3 className="test email">{user?.email}</h3>
         </div>
         <div className="test section1">
           <div className="test section1-left">
@@ -48,75 +149,75 @@ const Profile = (props: ProfilePageProps) => {
           </div>
           <div className="test section1-right">
             <Tooltip title="Click here to save your changes" arrow>
-              <button className="test save-button" onClick={()=>{}}>Save Changes</button>
+              <button className="test save-button" onClick={handleUpdateUser}>Save Changes</button>
             </Tooltip>
           </div>
         </div>
         <div className="test section2">
           <div className="test section2-left">
             <div className="test input">
-              <Lable 
+              <Lable
                 title='First Name'
               />
-              <DashboardTextfield 
+              <DashboardTextfield
                 type='text'
-                name='fname'
-                value='fname'
+                name='first_name'
+                value={formData?.first_name || ''}
                 placeholder='Enter your first name'
-                onChange={()=>{}}
+                onChange={handleChange}
               />
             </div>
             <div className="test input">
-              <Lable 
+              <Lable
                 title='Address'
               />
-              <DashboardTextfield 
+              <DashboardTextfield
                 type='text'
                 name='address'
-                value='address'
+                value={formData?.address || ''}
                 placeholder='Enter your address'
-                onChange={()=>{}}
+                onChange={handleChange}
               />
             </div>
           </div>
           <div className="test section2-left">
             <div className="test input">
-              <Lable 
+              <Lable
                 title='Last Name'
               />
-              <DashboardTextfield 
+              <DashboardTextfield
                 type='text'
-                name='lname'
-                value='lname'
+                name='last_name'
+                value={formData?.last_name || ''}
                 placeholder='Enter your Last name'
-                onChange={()=>{}}
+                onChange={handleChange}
               />
             </div>
             <div className="test input">
-              <Lable 
+              <Lable
                 title='Mobile'
               />
-              <DashboardTextfield 
+              <DashboardTextfield
                 type='text'
                 name='mobile'
-                value='mobile'
+                value={formData?.mobile || ''}
                 placeholder='Enter your mobile'
-                onChange={()=>{}}
+                onChange={handleChange}
               />
             </div>
           </div>
         </div>
 
-        <hr className='test hard-line'/>
+        <hr className='test hard-line' />
 
         <div className="test logout-section">
           <Tooltip title="Logout" arrow>
-            <button className="test logout-container" onClick={()=>{}}>
-                <h5 className="test btn-text">Logout</h5>
+            <button className="test logout-container" onClick={handleLogout}>
+              <h5 className="test btn-text">Logout</h5>
             </button>
           </Tooltip>
         </div>
-        
+
       </div>
     </div>
   );

@@ -59,7 +59,7 @@
                     color: $white;
                     font-size: 13px;
                     font-weight: normal;
-                    font-family: $primary-font;   
+                    font-family: $primary-font;
                 }
             }
         }
@@ -113,7 +113,7 @@
                     border-radius: 50%;
                     padding: 5px;
                     background-color: $white;
-                    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1), 
+                    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1),
                         15px 15px 30px rgba(0, 0, 0, 0.1);
 
                     .profile-image {
@@ -130,11 +130,26 @@
                 justify-content: flex-end;
                 gap: 5px;
 
-                .name {
-                    color: $black;
-                    font-family: $primary-font;
-                    cursor: pointer;
-                    width: fit-content;
+                .div {
+                    display: flex;
+                    align-items: center;
+                    gap: 20px;
+
+                    .name {
+                        color: $black;
+                        font-family: $primary-font;
+                        cursor: pointer;
+                        width: fit-content;
+                    }
+
+                    .role {
+                        color: $white;
+                        font-family: $primary-font;
+                        padding: 5px 10px;
+                        border-radius: 0.25rem;
+                        font-weight: normal;
+                        cursor: pointer;
+                    }
                 }
 
                 .userId {
@@ -196,7 +211,8 @@
         gap: 20px;
         grid-template-columns: repeat(2, 1fr);
 
-        .section2-left, .section2-right {
+        .section2-left,
+        .section2-right {
 
             .input {
                 margin-bottom: 10px;
