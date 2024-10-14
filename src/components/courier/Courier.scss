@@ -4,7 +4,7 @@
 
 .courier {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     cursor: pointer;
     width: 100%;
     margin-bottom: 1px;
@@ -24,6 +24,7 @@
             color: rgb(73, 73, 73);
             font-family: $primary-font;
             font-size: 12px;
+            text-align: center;
             font-weight: normal;
         }
     }

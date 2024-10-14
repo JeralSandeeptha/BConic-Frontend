@@ -77,7 +77,12 @@ export type PageHeaderProps = {
 }
 
 export type CourierProps = {
-    _id?: string,
+    courier_id?: string,
+    trackingNumber?: string,
+    senderName?: string,
+    recepientName?: string,
+    status?: string,
+    created_at?: string,
 }
 
 export type NoDataProps = {

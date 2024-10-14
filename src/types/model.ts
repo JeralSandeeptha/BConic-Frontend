@@ -50,3 +50,33 @@ export interface UpdateUser {
     address?: string;
     mobile?: string;
 }
+
+export interface ICourier {
+    courier_id?: number;
+    trackingNumber?: string;
+    user_id?: string;
+    senderName?: string;
+    senderAddress?: string;
+    mobile?: string;
+    recepientName?: string;
+    recepientAddress?: string;
+    additionalInfo?: string;
+    status?: string;
+    created_at?: string;
+    updated_at?: string;
+}
+
+export interface IGetCourier {
+    courier_id?: number;
+    tracking_number?: string;
+    user_id?: string;
+    sender_name?: string;
+    sender_address?: string;
+    mobile?: string;
+    recipient_name?: string;
+    recipient_address?: string;
+    additional_info?: string;
+    status?: string;
+    created_at?: string;
+    updated_at?: string;
+}

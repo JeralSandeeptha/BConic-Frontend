@@ -1,6 +1,6 @@
 import { Dispatch, ReactNode, SetStateAction } from "react"
 import { NavigateFunction } from "react-router-dom"
-import { UpdateUser, User } from "./model";
+import { ICourier, UpdateUser, User } from "./model";
 
 export type HandleUserRegisterProps = {
     email: string,
@@ -58,4 +58,9 @@ export type UpdateUserProps = {
     setStatusCode: Dispatch<SetStateAction<number>>,
     setMessage: Dispatch<SetStateAction<string>>,
     getSingleUser?: (props: GetSingleUserProps) => void,
+}
+
+export type GetCouriersByUserIdProps = {
+    userId: string | null,
+    setCourieres: Dispatch<SetStateAction<ICourier[]>>
 }
