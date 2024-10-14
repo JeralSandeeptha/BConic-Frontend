@@ -105,9 +105,6 @@ const MyCouriersPage = (props: MyCouriersPageProps) => {
                         <h5 className="test header-text">Track ID</h5>
                     </div>
                     <div className="test header">
-                        <h5 className="test header-text">Sender</h5>
-                    </div>
-                    <div className="test header">
                         <h5 className="test header-text">Recepient</h5>
                     </div>
                     <div className="test header">

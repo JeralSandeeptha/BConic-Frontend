@@ -12,9 +12,6 @@ const Courier = (props: IGetCourier) => {
                     <h5 className="test header-text">{props.tracking_number}</h5>
                 </div>
                 <div className="test header">
-                    <h5 className="test header-text">{props.recipient_address}</h5>
-                </div>
-                <div className="test header">
                     <h5 className="test header-text">{props.recipient_name}</h5>
                 </div>
                 <div className="test header">
