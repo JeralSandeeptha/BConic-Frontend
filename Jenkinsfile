@@ -1,8 +1,9 @@
 pipeline{
     agent {
-        label 'docker';
-        image 'ubuntu:20.04';
-        args '-u root:root';
+        docker {
+            image 'node:22'
+            args '-u root:root'
+        }
     }
     stages{
         stage("Clean Workspace"){
@@ -22,6 +23,7 @@ pipeline{
         stage("Unit Testing"){
             steps{
                 echo "========Executing Unit Testing========"
+                sh 'npm install';
                 sh 'npm run test';
             }
             post{
