@@ -20,6 +20,20 @@ pipeline{
                 }
             }
         }
+        stage("Checkout SCM"){
+            steps{
+                echo "========Executing Checkout SCM========"
+                git branch: 'main', url: 'https://github.com/JeralSandeeptha/BConic-Frontend.git'
+            }
+            post{
+                success{
+                    echo "========Checkout SCM executed successfully========"
+                }
+                failure{
+                    echo "========Checkout SCM execution failed========"
+                }
+            }
+        }
         stage("Code Quality Check"){
             steps{
                 echo "========Executing Code Quality Check========"
