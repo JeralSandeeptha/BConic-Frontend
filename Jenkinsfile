@@ -20,6 +20,19 @@ pipeline{
                 }
             }
         }
+        stage("Code Quality Check"){
+            steps{
+                echo "========Executing Code Quality Check========"
+            }
+            post{
+                success{
+                    echo "========Code Quality Check executed successfully========"
+                }
+                failure{
+                    echo "========Code Quality Check execution failed========"
+                }
+            }
+        }
         stage("Unit Testing"){
             steps{
                 echo "========Executing Unit Testing========"
