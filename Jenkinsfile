@@ -2,6 +2,10 @@ pipeline{
     agent any;
 
     environment {
+        // Docker ENV
+        nodejs "nodejs"
+
+        // Docker ENV
         APP_NAME = "bconic-frontend"
         RELEASE = "1.0.0"
         DOCKER_USER = "jeralsandeeptha"
