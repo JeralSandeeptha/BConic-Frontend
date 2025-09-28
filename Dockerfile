@@ -6,6 +6,10 @@ FROM node:lts-alpine AS build
 # Set working directory
 WORKDIR /app
 
+# Accept build argument
+ARG REACT_APP_BACKEND_BASE_URL
+ENV REACT_APP_BACKEND_BASE_URL=$REACT_APP_BACKEND_BASE_URL
+
 # Install dependencies
 COPY package*.json ./
 RUN npm ci
