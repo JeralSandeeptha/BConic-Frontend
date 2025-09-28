@@ -60,8 +60,8 @@ pipeline{
         }
         stage('Verify the Branch') {
           steps {
-            bat 'git branch'
-            bat 'git log -1 --oneline'
+            sh 'git branch'
+            sh 'git log -1 --oneline'
           }
         }
         // stage("Install Dependencies"){
