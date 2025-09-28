@@ -65,20 +65,20 @@ pipeline{
             sh 'git log -1 --oneline'
           }
         }
-        // stage("Install Dependencies"){
-        //     steps{
-        //         echo "========Install Dependencies========"
-        //         sh 'npm install';
-        //     }
-        //     post{
-        //         success{
-        //             echo "========Install Dependencies executed successfully========"
-        //         }
-        //         failure{
-        //             echo "========Install Dependencies execution failed========"
-        //         }
-        //     }
-        // }
+        stage("Install Dependencies"){
+            steps{
+                echo "========Install Dependencies========"
+                sh 'npm install';
+            }
+            post{
+                success{
+                    echo "========Install Dependencies executed successfully========"
+                }
+                failure{
+                    echo "========Install Dependencies execution failed========"
+                }
+            }
+        }
         stage("Unit Testing"){
             steps{
                 echo "========Executing Unit Testing========"
