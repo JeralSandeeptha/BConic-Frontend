@@ -1,10 +1,5 @@
 pipeline{
-    agent {
-        docker {
-            image 'node:22'
-            args '-v $HOME/.npm:/root/.npm'
-        }
-    }
+    agent any;
 
     environment {
         APP_NAME = "bconic-frontend"
