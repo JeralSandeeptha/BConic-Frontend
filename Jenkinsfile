@@ -34,7 +34,6 @@ pipeline{
                 echo "========Verify Tools Workspace========"
                 sh 'node --version';
                 sh 'npm --version';
-                sh 'docker --version';
             }
             post{
                 success{
