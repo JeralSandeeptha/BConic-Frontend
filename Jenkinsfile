@@ -117,6 +117,8 @@ pipeline{
         stage("Build Project"){
             steps{
                 echo "========Executing Build Project========"
+                sh 'npm install --save-dev @babel/plugin-proposal-private-property-in-object';
+                sh 'npx update-browserslist-db@latest';
                 sh 'npm run build';
             }
             post{
