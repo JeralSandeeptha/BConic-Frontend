@@ -1,10 +1,11 @@
 pipeline{
     agent any;
 
-    environment {
-        // Docker ENV
+    tools {
         nodejs "nodejs"
+    }
 
+    environment {
         // Docker ENV
         APP_NAME = "bconic-frontend"
         RELEASE = "1.0.0"
