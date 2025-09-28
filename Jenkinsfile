@@ -94,33 +94,33 @@ pipeline{
                 }
             }
         }
-        // stage("Code Quality Check"){
-        //     steps{
-        //         echo "========Executing Code Quality Check========"
-        //     }
-        //     post{
-        //         success{
-        //             echo "========Code Quality Check executed successfully========"
-        //         }
-        //         failure{
-        //             echo "========Code Quality Check execution failed========"
-        //         }
-        //     }
-        // }
-        // stage("Build Project"){
-        //     steps{
-        //         echo "========Executing Build Project========"
-        //         sh 'npm run build';
-        //     }
-        //     post{
-        //         success{
-        //             echo "========Build Project executed successfully========"
-        //         }
-        //         failure{
-        //             echo "========Build Project execution failed========"
-        //         }
-        //     }
-        // }
+        stage("Code Quality Check"){
+            steps{
+                echo "========Executing Code Quality Check========"
+            }
+            post{
+                success{
+                    echo "========Code Quality Check executed successfully========"
+                }
+                failure{
+                    echo "========Code Quality Check execution failed========"
+                }
+            }
+        }
+        stage("Build Project"){
+            steps{
+                echo "========Executing Build Project========"
+                sh 'npm run build';
+            }
+            post{
+                success{
+                    echo "========Build Project executed successfully========"
+                }
+                failure{
+                    echo "========Build Project execution failed========"
+                }
+            }
+        }
         // stage("Build Artifact"){
         //     steps{
         //         echo "========Executing Build Artifact========"
