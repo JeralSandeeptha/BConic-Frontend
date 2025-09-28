@@ -2,6 +2,7 @@ pipeline{
     agent {
         docker {
             image 'node:22'
+            args '-v $HOME/.npm:/root/.npm'
         }
     }
 
@@ -68,7 +69,7 @@ pipeline{
         stage("Install Dependencies"){
             steps{
                 echo "========Install Dependencies========"
-                sh 'npm install';
+                sh 'npm ci';
             }
             post{
                 success{
