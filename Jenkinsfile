@@ -3,6 +3,7 @@ pipeline{
 
     tools {
         nodejs "nodejs"
+        sonar_scanner "sonar_scanner"
     }
 
     environment {
@@ -97,6 +98,13 @@ pipeline{
         stage("Code Quality Check"){
             steps{
                 echo "========Executing Code Quality Check========"
+                sh '''
+                        sonar-scanner \
+                          -Dsonar.projectKey=bconic-frontend \
+                          -Dsonar.sources=src \
+                          -Dsonar.host.url=$SONAR_HOST_URL \
+                          -Dsonar.login=$SONAR_AUTH_TOKEN
+                    '''
             }
             post{
                 success{
