@@ -1,4 +1,4 @@
-import React, { createContext, useState, ReactNode } from 'react';
+import React, { createContext, useState } from 'react';
 import { RoleContextType, RoleProviderProps } from '../types/model';
 
 export const RoleContext = createContext<RoleContextType | null>(null);

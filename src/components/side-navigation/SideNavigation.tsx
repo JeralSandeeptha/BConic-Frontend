@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './SideNavigation.scss';
 import AuthSubHeader from '../auth-subheader/AuthSubHeader';
 import NavigationLink from '../nav-link/NavigationLink';
@@ -50,19 +50,15 @@ const SideNavigation = () => {
     const role = roleContext?.role;
     if (!updateRole && !role) {
         throw new Error('Role context is not available');
-    } 
+    }
 
-    const getUserInfor = () => {
+    useEffect(() => {
         getSingleUser({
             id: id,
             setUser: setUser,
             token: token || ''
         });
-    }
-
-    useEffect(() => {
-        getUserInfor();
-    }, [])
+    }, [id, token]);
 
     return (
         <div className='test side-navigation'>

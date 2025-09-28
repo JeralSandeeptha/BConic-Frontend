@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GetAllCouriersProps, GetCourierProps } from "../../types/function";
+import { GetCourierProps } from "../../types/function";
 const baseURL = process.env.REACT_APP_BACKEND_BASE_URL;
 
 const getCourier = (props: GetCourierProps) => {

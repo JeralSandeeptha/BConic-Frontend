@@ -1,5 +1,5 @@
 import axios from "axios";
-import { HandleAddCourierProps, HandleUserRegisterProps } from "../../types/function";
+import { HandleAddCourierProps } from "../../types/function";
 
 const baseURL = process.env.REACT_APP_BACKEND_BASE_URL;
 

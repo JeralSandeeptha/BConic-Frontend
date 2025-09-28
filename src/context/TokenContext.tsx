@@ -1,4 +1,4 @@
-import React, { createContext, useState, ReactNode } from 'react';
+import React, { createContext, useState } from 'react';
 import { TokenContextType, TokenProviderProps } from '../types/model';
 
 export const TokenContext = createContext<TokenContextType | null>(null);

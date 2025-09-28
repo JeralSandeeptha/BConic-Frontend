@@ -1,27 +1,26 @@
-import React, { useContext, useEffect, useState } from 'react';
-import './Profile.scss';
-import PageHeader from '../../components/page-header/PageHeader';
-import { Tooltip } from '@mui/material';
-import Lable from '../../components/lable/Lable';
-import DashboardTextfield from '../../components/dashboard-textfield/DashboardTextfield';
-import { useNavigate } from 'react-router-dom';
-import { ProfilePageProps } from '../../types/page';
-import { TokenContext } from '../../context/TokenContext';
-import { IdContext } from '../../context/UserIdContext';
-import { UpdateUser, User } from '../../types/model';
-import { RoleContext } from '../../context/RoleContext';
-import getSingleUser from '../../api/user-service/getUser';
-import Alert from '../../components/alert/Alert';
-import updateUser from '../../api/user-service/updateUser';
+import React, { useContext, useEffect, useState } from "react";
+import "./Profile.scss";
+import PageHeader from "../../components/page-header/PageHeader";
+import { Tooltip } from "@mui/material";
+import Lable from "../../components/lable/Lable";
+import DashboardTextfield from "../../components/dashboard-textfield/DashboardTextfield";
+import { useNavigate } from "react-router-dom";
+import { ProfilePageProps } from "../../types/page";
+import { TokenContext } from "../../context/TokenContext";
+import { IdContext } from "../../context/UserIdContext";
+import { UpdateUser, User } from "../../types/model";
+import { RoleContext } from "../../context/RoleContext";
+import getSingleUser from "../../api/user-service/getUser";
+import Alert from "../../components/alert/Alert";
+import updateUser from "../../api/user-service/updateUser";
 
 const Profile = (props: ProfilePageProps) => {
-
   const [user, setUser] = useState<User | undefined>(undefined);
   const [formData, setFormData] = useState<UpdateUser>();
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
   const [statusCode, setStatusCode] = useState(0);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -29,20 +28,20 @@ const Profile = (props: ProfilePageProps) => {
   const id = idContext?.id;
   const clearId = idContext?.clearId;
   if (!id) {
-    throw new Error('Id context is not available');
+    throw new Error("Id context is not available");
   }
 
   const tokenContext = useContext(TokenContext);
   if (!tokenContext) {
-    throw new Error('Token context is not available');
+    throw new Error("Token context is not available");
   }
   const { clearToken, token } = tokenContext;
 
   const roleContext = useContext(RoleContext);
   if (!roleContext) {
-    throw new Error('Role context is not available');
-  } 
-  const { role, clearRole } = roleContext;
+    throw new Error("Role context is not available");
+  }
+  const { clearRole } = roleContext;
 
   const handleLogout = () => {
     const confirmed = window.confirm("Are you sure you want to log out?");
@@ -52,9 +51,9 @@ const Profile = (props: ProfilePageProps) => {
         clearId();
       }
       clearRole();
-      navigate('/login');
+      navigate("/login");
     }
-  }
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prevFormData) => ({
@@ -74,45 +73,32 @@ const Profile = (props: ProfilePageProps) => {
       setMessage: setMessage,
       setStatusCode: setStatusCode,
       getSingleUser: getSingleUser,
-      token: token || ''
+      token: token || "",
     });
-  }
+  };
 
-  const getUserInfor = () => {
+  useEffect(() => {
     getSingleUser({
       setUser: setUser,
       setFormData: setFormData,
       id: id,
-      token: token || ''
+      token: token || "",
     });
-  }
-
-  useEffect(() => {
-    getUserInfor();
-  }, []);
+  }, [id, token]);
 
   return (
-    <div className='profile'>
-
+    <div className="profile">
       <PageHeader
-        title='Profile'
-        subTitle='Here is your profile. Update and manage your profile details.'
+        title="Profile"
+        subTitle="Here is your profile. Update and manage your profile details."
       />
 
-      {
-        error && <Alert
-          message={message}
-          statusCode={statusCode}
-          type='error'
-        />
-      }
-      {
-        success && <Alert
-          message={message}
-          statusCode={statusCode}
-          type='success'
-        />
-      }
+      {error && (
+        <Alert message={message} statusCode={statusCode} type="error" />
+      )}
+      {success && (
+        <Alert message={message} statusCode={statusCode} type="success" />
+      )}
 
       <div className="profile-section">
         <div className="banner"></div>
@@ -120,20 +106,30 @@ const Profile = (props: ProfilePageProps) => {
           <div className="test name-container-left">
             <div className="test profile-image-container">
               <Tooltip title="Profile Image" arrow>
-                <img src="https://res.cloudinary.com/dv9ax00l4/image/upload/v1723890106/user-profile-img-removebg-preview_rlafow.png" alt="profile-img" className="test profile-image" />
+                <img
+                  src="https://res.cloudinary.com/dv9ax00l4/image/upload/v1723890106/user-profile-img-removebg-preview_rlafow.png"
+                  alt="profile-img"
+                  className="test profile-image"
+                />
               </Tooltip>
             </div>
           </div>
           <div className="test name-container-right">
             <Tooltip title="User Name" arrow>
               <div className="div">
-                <h1 className="test name">{user?.first_name && user?.last_name ? `${user?.first_name} ${user?.last_name}` : user?.email}</h1>
-                <h5 
+                <h1 className="test name">
+                  {user?.first_name && user?.last_name
+                    ? `${user?.first_name} ${user?.last_name}`
+                    : user?.email}
+                </h1>
+                <h5
                   className="test role"
                   style={{
-                    backgroundColor: user?.role === 'user' ? 'green' : 'red'
+                    backgroundColor: user?.role === "user" ? "green" : "red",
                   }}
-                >{user?.role}</h5>
+                >
+                  {user?.role}
+                </h5>
               </div>
             </Tooltip>
             <Tooltip title="User Id" arrow>
@@ -147,70 +143,66 @@ const Profile = (props: ProfilePageProps) => {
         <div className="test section1">
           <div className="test section1-left">
             <h3 className="test lable">Your Profile</h3>
-            <h6 className="test sub-lable">Update your user profile and details here</h6>
+            <h6 className="test sub-lable">
+              Update your user profile and details here
+            </h6>
           </div>
           <div className="test section1-right">
             <Tooltip title="Click here to save your changes" arrow>
-              <button className="test save-button" onClick={handleUpdateUser}>Save Changes</button>
+              <button className="test save-button" onClick={handleUpdateUser}>
+                Save Changes
+              </button>
             </Tooltip>
           </div>
         </div>
         <div className="test section2">
           <div className="test section2-left">
             <div className="test input">
-              <Lable
-                title='First Name'
-              />
+              <Lable title="First Name" />
               <DashboardTextfield
-                type='text'
-                name='first_name'
-                value={formData?.first_name || ''}
-                placeholder='Enter your first name'
+                type="text"
+                name="first_name"
+                value={formData?.first_name || ""}
+                placeholder="Enter your first name"
                 onChange={handleChange}
               />
             </div>
             <div className="test input">
-              <Lable
-                title='Address'
-              />
+              <Lable title="Address" />
               <DashboardTextfield
-                type='text'
-                name='address'
-                value={formData?.address || ''}
-                placeholder='Enter your address'
+                type="text"
+                name="address"
+                value={formData?.address || ""}
+                placeholder="Enter your address"
                 onChange={handleChange}
               />
             </div>
           </div>
           <div className="test section2-left">
             <div className="test input">
-              <Lable
-                title='Last Name'
-              />
+              <Lable title="Last Name" />
               <DashboardTextfield
-                type='text'
-                name='last_name'
-                value={formData?.last_name || ''}
-                placeholder='Enter your Last name'
+                type="text"
+                name="last_name"
+                value={formData?.last_name || ""}
+                placeholder="Enter your Last name"
                 onChange={handleChange}
               />
             </div>
             <div className="test input">
-              <Lable
-                title='Mobile'
-              />
+              <Lable title="Mobile" />
               <DashboardTextfield
-                type='text'
-                name='mobile'
-                value={formData?.mobile || ''}
-                placeholder='Enter your mobile'
+                type="text"
+                name="mobile"
+                value={formData?.mobile || ""}
+                placeholder="Enter your mobile"
                 onChange={handleChange}
               />
             </div>
           </div>
         </div>
 
-        <hr className='test hard-line' />
+        <hr className="test hard-line" />
 
         <div className="test logout-section">
           <Tooltip title="Logout" arrow>
@@ -219,10 +211,9 @@ const Profile = (props: ProfilePageProps) => {
             </button>
           </Tooltip>
         </div>
-
       </div>
     </div>
   );
-}
+};
 
 export default Profile;

@@ -1,4 +1,4 @@
-import React, { createContext, useState, ReactNode } from 'react';
+import React, { createContext, useState } from 'react';
 import { IdContextType, IdProviderProps } from '../types/model';
 
 export const IdContext = createContext<IdContextType | null>(null);
