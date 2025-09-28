@@ -87,7 +87,7 @@ const SideNavigation = () => {
                     }
                     <hr className='line' />
                     {
-                        role == 'admin' && (
+                        role === 'admin' && (
                             <NavigationLink
                                 id={4}
                                 name="Handle Couriers"

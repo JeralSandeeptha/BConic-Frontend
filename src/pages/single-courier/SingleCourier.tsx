@@ -142,22 +142,22 @@ const SingleCourier = (props: SingleCourierPageProps) => {
 
         <div className="anim-container">
           {
-            courier?.status == 'Order Placed' && (
+            courier?.status === 'Order Placed' && (
               <Lottie animationData={animationData1} className='test anim' />
             )
           }
           {
-            courier?.status == 'Delivered' && (
+            courier?.status === 'Delivered' && (
               <Lottie animationData={animationData2} className='test anim' />
             )
           }
           {
-            courier?.status == 'Picked Up' && (
+            courier?.status === 'Picked Up' && (
               <Lottie animationData={animationData3} className='test anim' />
             )
           }
           {
-            courier?.status == 'CANCELLED' && (
+            courier?.status === 'CANCELLED' && (
               <Lottie animationData={animationData4} className='test anim' />
             )
           }

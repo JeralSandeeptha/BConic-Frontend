@@ -156,7 +156,7 @@ const SingleCourierAdmin = (props: SingleCourierPageProps) => {
             </div>
             <div className="test info-container">
               <h6 className="test info-lable">Status :</h6>
-              <select id="options" className='options test' value={selectedStatus} onChange={handleStatusChange} disabled={courier?.status == 'Delivered' ? true : false}>
+              <select id="options" className='options test' value={selectedStatus} onChange={handleStatusChange} disabled={courier?.status === 'Delivered' ? true : false}>
                 {Object.values(COURIER_STATUS).map((status) => (
                   <option key={status} value={status} className='test option'>{status}</option>
                 ))}
@@ -173,7 +173,7 @@ const SingleCourierAdmin = (props: SingleCourierPageProps) => {
         </div>
 
         {
-          courier?.status == 'Delivered' ? (
+          courier?.status === 'Delivered' ? (
             <AuthHeader title='Order Completed' />
           ) : (
             <Section marginTop='20px'>

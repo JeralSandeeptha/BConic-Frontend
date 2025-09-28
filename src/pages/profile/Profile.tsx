@@ -131,7 +131,7 @@ const Profile = (props: ProfilePageProps) => {
                 <h5 
                   className="test role"
                   style={{
-                    backgroundColor: user?.role == 'user' ? 'green' : 'red'
+                    backgroundColor: user?.role === 'user' ? 'green' : 'red'
                   }}
                 >{user?.role}</h5>
               </div>
