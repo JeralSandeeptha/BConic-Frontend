@@ -79,20 +79,20 @@ pipeline{
         //         }
         //     }
         // }
-        // stage("Unit Testing"){
-        //     steps{
-        //         echo "========Executing Unit Testing========"
-        //         sh 'npm run test';
-        //     }
-        //     post{
-        //         success{
-        //             echo "========Unit Testing executed successfully========"
-        //         }
-        //         failure{
-        //             echo "========Unit Testing execution failed========"
-        //         }
-        //     }
-        // }
+        stage("Unit Testing"){
+            steps{
+                echo "========Executing Unit Testing========"
+                sh 'npm run test';
+            }
+            post{
+                success{
+                    echo "========Unit Testing executed successfully========"
+                }
+                failure{
+                    echo "========Unit Testing execution failed========"
+                }
+            }
+        }
         // stage("Code Quality Check"){
         //     steps{
         //         echo "========Executing Code Quality Check========"
