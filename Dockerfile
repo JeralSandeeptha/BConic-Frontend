@@ -13,6 +13,9 @@ RUN npm ci
 # Copy source code
 COPY . .
 
+# Accept API URL as build arg
+ENV REACT_APP_API_URL=http://backend:5000/api/v1
+
 # Build the frontend
 RUN npm run build
 
