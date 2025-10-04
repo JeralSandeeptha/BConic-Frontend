@@ -1,6 +1,7 @@
 import axios from "axios";
 import { GetCourierProps } from "../../types/function";
-const baseURL = process.env.REACT_APP_BACKEND_BASE_URL;
+import { config } from "../../config/config";
+const baseURL = config.REACT_APP_BACKEND_BASE_URL;
 
 const getCourier = (props: GetCourierProps) => {
     try {

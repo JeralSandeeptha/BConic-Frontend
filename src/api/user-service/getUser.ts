@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { GetSingleUserProps } from '../../types/function';
+import { config } from '../../config/config';
 
-const baseURL = process.env.REACT_APP_BACKEND_BASE_URL;
+const baseURL = config.REACT_APP_BACKEND_BASE_URL;
 
 const getSingleUser = (props: GetSingleUserProps) => {
 
