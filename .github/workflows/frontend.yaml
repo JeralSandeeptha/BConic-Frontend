@@ -85,11 +85,11 @@ jobs:
                   environment: 'production'
                 }
               });
-              console.log('✅ Deployment workflow triggered successfully');
+              console.log('Deployment workflow triggered successfully');
             } catch (error) {
-              console.error('❌ Failed to trigger deployment workflow:', error.message);
-              console.log('💡 Check that:');
-              console.log('   - PAT_TOKEN secret is correctly set');
-              console.log('   - Workflow filename is correct (frontend-deploy.yml)');
-              console.log('   - Repository name is correct (BConic-Kubernates-Deployment)');
+              console.error('Failed to trigger deployment workflow:', error.message);
+              console.log('Check that:');
+              console.log('PAT_TOKEN secret is correctly set');
+              console.log('Workflow filename is correct (frontend-deploy.yml)');
+              console.log('Repository name is correct (BConic-Kubernates-Deployment)');
             }
