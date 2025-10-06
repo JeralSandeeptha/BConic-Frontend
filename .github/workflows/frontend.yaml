@@ -74,22 +74,14 @@ jobs:
         with:
           github-token: ${{ secrets.PAT_TOKEN }}
           script: |
-            try {
-              await github.rest.actions.createWorkflowDispatch({
-                owner: 'JeralSandeeptha',
-                repo: 'BConic-Kubernates-Deployment',
-                workflow_id: 'frontend-deploy.yml',  # Make sure this filename is correct
-                ref: 'main',
-                inputs: {
-                  image_sha: '${{ github.sha }}',
-                  environment: 'production'
-                }
-              });
-              console.log('Deployment workflow triggered successfully');
-            } catch (error) {
-              console.error('Failed to trigger deployment workflow:', error.message);
-              console.log('Check that:');
-              console.log('PAT_TOKEN secret is correctly set');
-              console.log('Workflow filename is correct (frontend-deploy.yml)');
-              console.log('Repository name is correct (BConic-Kubernates-Deployment)');
-            }
+            await github.rest.actions.createWorkflowDispatch({
+              owner: 'JeralSandeeptha',
+              repo: 'BConic-Kubernates-Deployment',
+              workflow_id: 'frontend-deploy.yml',
+              ref: 'main',
+              inputs: {
+                image_sha: '${{ github.sha }}',
+                environment: 'production'
+              }
+            });
+            console.log('Deployment workflow triggered successfully');
