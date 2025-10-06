@@ -77,7 +77,7 @@ jobs:
             await github.rest.actions.createWorkflowDispatch({
               owner: 'JeralSandeeptha',
               repo: 'BConic-Kubernates-Deployment',
-              workflow_id: 'frontend-deploy.yml',
+              workflow_id: 'frontend-deploy.yaml',
               ref: 'main',
               inputs: {
                 image_sha: '${{ github.sha }}',
